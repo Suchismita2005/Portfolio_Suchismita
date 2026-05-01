@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seminars - Suchismita Saha</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Modern Navigation Styles */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-linkedin {
+            color: #4ade80;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-linkedin:hover {
+            color: #22d3ee;
+            transform: translateY(-2px);
+        }
+        
+        .logo-text {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: #4ade80;
+        }
+        
+        .nav-link.active {
+            color: #4ade80;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(45deg, #4ade80, #22d3ee);
+        }
+        
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: #ffffff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: #1e293b;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-toggle {
+                display: flex;
+            }
+        }
+        
+        /* Seminars Page Styles */
+        .seminars-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            overflow: hidden;
+        }
+        
+        .seminars-hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+        }
+        
+        .seminars-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4ade80, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .seminars-hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .social-media-layout {
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .back-to-portfolio {
+            position: absolute;
+            top: 20px;
+            right: 320px;
+            background: linear-gradient(45deg, #4ade80, #22d3ee);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-to-portfolio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(74, 222, 128, 0.3);
+        }
+        
+        .back-to-portfolio i {
+            font-size: 1rem;
+        }
+        
+                
+        .sidebar-nav {
+            width: 250px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        
+        .sidebar-nav h3 {
+            color: #4ade80;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(74, 222, 128, 0.3);
+        }
+        
+        .nav-item {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+            border-left-color: #4ade80;
+            transform: translateX(3px);
+        }
+        
+        .nav-item.active {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.15);
+            border-left-color: #4ade80;
+        }
+        
+        .posts-container {
+            flex: 1;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding: 0 20px;
+        }
+        
+        .stats-sidebar {
+            width: 280px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        
+        .stats-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(74, 222, 128, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stats-card h3 {
+            color: #4ade80;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(74, 222, 128, 0.3);
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .stat-value {
+            color: #22d3ee;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .institute-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .institute-item:last-child {
+            border-bottom: none;
+        }
+        
+        .institute-name {
+            color: #4ade80;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        
+        .institute-details {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .professor-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .professor-item:last-child {
+            border-bottom: none;
+        }
+        
+        .professor-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4ade80, #22d3ee);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .professor-info {
+            flex: 1;
+        }
+        
+        .professor-name {
+            color: #22d3ee;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+        
+        .professor-title {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+        
+        .seminar-post {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(74, 222, 128, 0.3);
+            border-radius: 12px;
+            margin: 0 auto 20px auto;
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .seminar-post:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.2);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            gap: 12px;
+        }
+        
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4ade80, #22d3ee);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .post-info {
+            flex: 1;
+        }
+        
+        .post-author {
+            color: #4ade80;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .post-date {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(34, 211, 238, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .post-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+        }
+        
+        .image-gallery {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .gallery-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-close:hover {
+            background: rgba(255, 107, 107, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .post-content {
+            padding: 15px;
+        }
+        
+        .image-scroll-container {
+            width: 85%;
+            height: 180px;
+            margin: 0 auto;
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: flex;
+            gap: 8px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            scroll-behavior: smooth;
+        }
+        
+        .image-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .image-scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        
+        .image-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(74, 222, 128, 0.5);
+            border-radius: 4px;
+        }
+        
+        .image-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(74, 222, 128, 0.7);
+        }
+        
+        .scroll-image {
+            min-width: 150px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3);
+        }
+        
+        .post-title {
+            color: #22d3ee;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .post-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            padding: 0 15px 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 15px;
+        }
+        
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            user-select: none;
+        }
+        
+        .post-action:hover {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+            border-color: rgba(74, 222, 128, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .post-action:active {
+            transform: translateY(0);
+            background: rgba(74, 222, 128, 0.2);
+        }
+        
+        .post-action.liked {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+        
+        .post-action.liked:hover {
+            color: #ff5252;
+            background: rgba(255, 107, 107, 0.2);
+        }
+        
+        .post-action i {
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .post-action:hover i {
+            transform: scale(1.2);
+        }
+        
+        .post-action.liked i {
+            animation: heartBeat 0.3s ease;
+        }
+        
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .post-stats {
+            display: flex;
+            gap: 15px;
+            padding: 0 15px 15px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        .certificate-link {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .certificate-link:hover {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+            border-color: rgba(74, 222, 128, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* Certificate Modal Styles */
+        .certificate-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .certificate-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .certificate-modal-content {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 20px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid rgba(74, 222, 128, 0.3);
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .certificate-modal.show .certificate-modal-content {
+            transform: scale(1);
+        }
+        
+        .certificate-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .certificate-modal-header h3 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .certificate-modal-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+        }
+        
+        .certificate-modal-close:hover {
+            color: #ff6b6b;
+            transform: scale(1.1);
+        }
+        
+        .certificate-modal-body {
+            padding: 2rem;
+        }
+        
+        .certificate-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            border: 3px solid #4ade80;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .certificate-header {
+            margin-bottom: 2rem;
+        }
+        
+        .certificate-logo {
+            font-size: 3rem;
+            color: #4ade80;
+            margin-bottom: 1rem;
+        }
+        
+        .certificate-header h1 {
+            color: #0f172a;
+            font-size: 2.5rem;
+            margin: 0 0 1rem 0;
+            font-weight: bold;
+        }
+        
+        .certificate-header p {
+            color: #64748b;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        
+        .certificate-body {
+            margin: 2rem 0;
+        }
+        
+        .certificate-name {
+            color: #4ade80;
+            font-size: 2rem;
+            margin: 0 0 1rem 0;
+            font-weight: bold;
+        }
+        
+        .certificate-text {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin: 0 0 1rem 0;
+        }
+        
+        .certificate-title {
+            color: #0f172a;
+            font-size: 1.5rem;
+            margin: 0 0 1rem 0;
+            font-weight: bold;
+        }
+        
+        .certificate-date {
+            color: #64748b;
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        .certificate-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .certificate-signature {
+            text-align: center;
+        }
+        
+        .signature-line {
+            width: 150px;
+            height: 2px;
+            background: #475569;
+            margin: 0 auto 0.5rem auto;
+        }
+        
+        .certificate-signature p {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .certificate-seal {
+            font-size: 3rem;
+            color: #22d3ee;
+        }
+        
+        .certificate-modal-actions {
+            display: flex;
+            gap: 1rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: center;
+        }
+        
+        .certificate-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #4ade80, #22d3ee);
+            color: white;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(74, 222, 128, 0.3);
+        }
+        
+        .share-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .certificate-modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+            
+            .certificate-container {
+                padding: 2rem 1rem;
+            }
+            
+            .certificate-header h1 {
+                font-size: 2rem;
+            }
+            
+            .certificate-name {
+                font-size: 1.5rem;
+            }
+            
+            .certificate-title {
+                font-size: 1.2rem;
+            }
+            
+            .certificate-footer {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .certificate-modal-actions {
+                flex-direction: column;
+            }
+            
+            .certificate-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="https://www.linkedin.com/in/suchismita-saha-33259728a/" target="_blank" class="logo-linkedin">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <span class="logo-text">Suchismita Saha</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" onclick="closeMobileMenu(); return false;">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="seminars.html" class="nav-link active">Seminars</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link" onclick="closeMobileMenu(); return false;">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seminars Hero Section -->
+    <section class="seminars-hero">
+        <div class="seminars-hero-content">
+            <h1>Seminars & Workshops</h1>
+            <p>Collection of professional development seminars, workshops, and learning experiences in biomedical engineering, signal processing, and healthcare technologies.</p>
+        </div>
+    </section>
+
+    <!-- Image Gallery Modal -->
+    <div class="image-gallery" id="imageGallery">
+        <button class="gallery-close" onclick="closeGallery()">
+            <i class="fas fa-times"></i>
+        </button>
+        <img class="gallery-image" id="galleryImage" src="" alt="Gallery Image">
+    </div>
+
+    <!-- Social Media Style Seminars -->
+    <div class="social-media-layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar-nav">
+            <h3>📚 Seminars</h3>
+            <a href="#bci-workshop" class="nav-item active">🧠 BCI Workshop</a>
+            <a href="#biomedical-innovation" class="nav-item">🔬 Biomedical Innovation</a>
+            <a href="#medical-devices" class="nav-item">🏥 Medical Devices</a>
+            <a href="#neuroscience-research" class="nav-item">🔍 Neuroscience Research</a>
+            <a href="#biomedical-engineering" class="nav-item">🔬 Biomedical Engineering</a>
+            <a href="#healthcare-technology" class="nav-item">🏥 Healthcare Technology</a>
+            <a href="#research-methodology" class="nav-item">📚 Research Methodology</a>
+            <a href="#medical-device-innovation" class="nav-item">🔬 Medical Device Innovation</a>
+        </div>
+        
+        <!-- Posts Container -->
+        <div class="posts-container">
+            <div class="seminar-post" id="bci-workshop">
+            <div class="post-header">
+                <div class="post-avatar">SS</div>
+                <div class="post-info">
+                    <div class="post-author">Suchismita Saha</div>
+                    <div class="post-date">March 15, 2024</div>
+                </div>
+            </div>
+            <div class="image-scroll-container">
+                <img class="scroll-image" src="https://picsum.photos/seed/bci-workshop-1/150/180.jpg" alt="BCI Workshop 1" onclick="openGallery('https://picsum.photos/seed/bci-workshop-1/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/bci-workshop-2/150/180.jpg" alt="BCI Workshop 2" onclick="openGallery('https://picsum.photos/seed/bci-workshop-2/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/bci-workshop-3/150/180.jpg" alt="BCI Workshop 3" onclick="openGallery('https://picsum.photos/seed/bci-workshop-3/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/bci-workshop-4/150/180.jpg" alt="BCI Workshop 4" onclick="openGallery('https://picsum.photos/seed/bci-workshop-4/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/bci-workshop-5/150/180.jpg" alt="BCI Workshop 5" onclick="openGallery('https://picsum.photos/seed/bci-workshop-5/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/bci-workshop-6/150/180.jpg" alt="BCI Workshop 6" onclick="openGallery('https://picsum.photos/seed/bci-workshop-6/1200/800.jpg')">
+            </div>
+            <div class="post-content">
+                <div class="post-title">🧠 Brain-Computer Interface Workshop</div>
+                <div class="post-description">
+                    Amazing hands-on workshop on BCI technologies! Learned about EEG signal processing, ML algorithms, and real-time applications in healthcare. The practical sessions were incredibly insightful! 🚀
+                </div>
+                <div class="post-stats">
+                    <span>📍 IIT Kharagpur</span>
+                    <span>⏱️ 2 Days</span>
+                    <span class="certificate-link" onclick="openCertificate('bci-workshop')">📜 Certificate</span>
+                </div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action">
+                    <i class="fas fa-heart"></i>
+                    <span>42</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-comment"></i>
+                    <span>8</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="seminar-post" id="biomedical-innovation">
+            <div class="post-header">
+                <div class="post-avatar">SS</div>
+                <div class="post-info">
+                    <div class="post-author">Suchismita Saha</div>
+                    <div class="post-date">February 28, 2024</div>
+                </div>
+            </div>
+            <div class="image-scroll-container">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-innovation-1/150/180.jpg" alt="Biomedical Innovation 1" onclick="openGallery('https://picsum.photos/seed/biomedical-innovation-1/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-innovation-2/150/180.jpg" alt="Biomedical Innovation 2" onclick="openGallery('https://picsum.photos/seed/biomedical-innovation-2/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-innovation-3/150/180.jpg" alt="Biomedical Innovation 3" onclick="openGallery('https://picsum.photos/seed/biomedical-innovation-3/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-innovation-4/150/180.jpg" alt="Biomedical Innovation 4" onclick="openGallery('https://picsum.photos/seed/biomedical-innovation-4/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-innovation-5/150/180.jpg" alt="Biomedical Innovation 5" onclick="openGallery('https://picsum.photos/seed/biomedical-innovation-5/1200/800.jpg')">
+            </div>
+            <div class="post-content">
+                <div class="post-title">🔬 Biomedical Innovation Seminar</div>
+                <div class="post-description">
+                    Fascinating seminar on cutting-edge biomedical innovations! From wearable sensors to AI in diagnostics - the future of healthcare is here. So inspired to contribute to this field! 💡
+                </div>
+                <div class="post-stats">
+                    <span>📍 AIIMS Delhi</span>
+                    <span>⏱️ 1 Day</span>
+                    <span>🏆 Best Participant</span>
+                </div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action">
+                    <i class="fas fa-heart"></i>
+                    <span>38</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-comment"></i>
+                    <span>12</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="seminar-post" id="medical-devices">
+            <div class="post-header">
+                <div class="post-avatar">SS</div>
+                <div class="post-info">
+                    <div class="post-author">Suchismita Saha</div>
+                    <div class="post-date">January 20, 2024</div>
+                </div>
+            </div>
+            <div class="image-scroll-container">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-devices-1/150/180.jpg" alt="Medical Devices 1" onclick="openGallery('https://picsum.photos/seed/medical-devices-1/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-devices-2/150/180.jpg" alt="Medical Devices 2" onclick="openGallery('https://picsum.photos/seed/medical-devices-2/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-devices-3/150/180.jpg" alt="Medical Devices 3" onclick="openGallery('https://picsum.photos/seed/medical-devices-3/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-devices-4/150/180.jpg" alt="Medical Devices 4" onclick="openGallery('https://picsum.photos/seed/medical-devices-4/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-devices-5/150/180.jpg" alt="Medical Devices 5" onclick="openGallery('https://picsum.photos/seed/medical-devices-5/1200/800.jpg')">
+            </div>
+            <div class="post-content">
+                <div class="post-title">🏥 Medical Devices Exhibition</div>
+                <div class="post-description">
+                    Incredible experience at the Medical Devices Exhibition! Saw the latest innovations in patient monitoring systems and surgical robotics. The future of medical technology is mind-blowing! 🤖
+                </div>
+                <div class="post-stats">
+                    <span>📍 Kolkata Medical College</span>
+                    <span>⏱️ 3 Hours</span>
+                    <span>🎯 Interactive</span>
+                </div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action">
+                    <i class="fas fa-heart"></i>
+                    <span>56</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-comment"></i>
+                    <span>15</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="seminar-post" id="neuroscience-research">
+            <div class="post-header">
+                <div class="post-avatar">SS</div>
+                <div class="post-info">
+                    <div class="post-author">Suchismita Saha</div>
+                    <div class="post-date">December 10, 2023</div>
+                </div>
+            </div>
+            <div class="image-scroll-container">
+                <img class="scroll-image" src="https://picsum.photos/seed/neuroscience-research-1/150/180.jpg" alt="Neuroscience Research 1" onclick="openGallery('https://picsum.photos/seed/neuroscience-research-1/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/neuroscience-research-2/150/180.jpg" alt="Neuroscience Research 2" onclick="openGallery('https://picsum.photos/seed/neuroscience-research-2/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/neuroscience-research-3/150/180.jpg" alt="Neuroscience Research 3" onclick="openGallery('https://picsum.photos/seed/neuroscience-research-3/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/neuroscience-research-4/150/180.jpg" alt="Neuroscience Research 4" onclick="openGallery('https://picsum.photos/seed/neuroscience-research-4/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/neuroscience-research-5/150/180.jpg" alt="Neuroscience Research 5" onclick="openGallery('https://picsum.photos/seed/neuroscience-research-5/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/neuroscience-research-6/150/180.jpg" alt="Neuroscience Research 6" onclick="openGallery('https://picsum.photos/seed/neuroscience-research-6/1200/800.jpg')">
+            </div>
+            <div class="post-content">
+                <div class="post-title">🔍 Neuroscience Research Symposium</div>
+                <div class="post-description">
+                    Deep dive into neuroscience research! Amazing presentations on neural networks, brain mapping, and cognitive computing. So much to learn and explore in this field! 🧪✨
+                </div>
+                <div class="post-stats">
+                    <span>📍 NIMHANS</span>
+                    <span>⏱️ 2 Days</span>
+                    <span>📚 Research Focus</span>
+                </div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action">
+                    <i class="fas fa-heart"></i>
+                    <span>71</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-comment"></i>
+                    <span>23</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="seminar-post" id="biomedical-engineering">
+            <div class="post-header">
+                <div class="post-avatar">SS</div>
+                <div class="post-info">
+                    <div class="post-author">Suchismita Saha</div>
+                    <div class="post-date">November 20, 2023</div>
+                </div>
+            </div>
+            <div class="image-scroll-container">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-engineering-1/150/180.jpg" alt="Biomedical Engineering 1" onclick="openGallery('https://picsum.photos/seed/biomedical-engineering-1/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-engineering-2/150/180.jpg" alt="Biomedical Engineering 2" onclick="openGallery('https://picsum.photos/seed/biomedical-engineering-2/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-engineering-3/150/180.jpg" alt="Biomedical Engineering 3" onclick="openGallery('https://picsum.photos/seed/biomedical-engineering-3/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-engineering-4/150/180.jpg" alt="Biomedical Engineering 4" onclick="openGallery('https://picsum.photos/seed/biomedical-engineering-4/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/biomedical-engineering-5/150/180.jpg" alt="Biomedical Engineering 5" onclick="openGallery('https://picsum.photos/seed/biomedical-engineering-5/1200/800.jpg')">
+            </div>
+            <div class="post-content">
+                <div class="post-title">🔬 International Biomedical Engineering Conference</div>
+                <div class="post-description">
+                    Three-day international conference bringing together biomedical engineers, researchers, and industry professionals to discuss latest innovations and challenges in biomedical engineering.
+                </div>
+                <div class="post-stats">
+                    <span>📍 Virtual Event</span>
+                    <span>⏱️ 3 Days</span>
+                    <span>🌎 International</span>
+                </div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action">
+                    <i class="fas fa-heart"></i>
+                    <span>85</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-comment"></i>
+                    <span>30</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="seminar-post" id="healthcare-technology">
+            <div class="post-header">
+                <div class="post-avatar">SS</div>
+                <div class="post-info">
+                    <div class="post-author">Suchismita Saha</div>
+                    <div class="post-date">September 5, 2023</div>
+                </div>
+            </div>
+            <div class="image-scroll-container">
+                <img class="scroll-image" src="https://picsum.photos/seed/healthcare-technology-1/150/180.jpg" alt="Healthcare Technology 1" onclick="openGallery('https://picsum.photos/seed/healthcare-technology-1/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/healthcare-technology-2/150/180.jpg" alt="Healthcare Technology 2" onclick="openGallery('https://picsum.photos/seed/healthcare-technology-2/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/healthcare-technology-3/150/180.jpg" alt="Healthcare Technology 3" onclick="openGallery('https://picsum.photos/seed/healthcare-technology-3/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/healthcare-technology-4/150/180.jpg" alt="Healthcare Technology 4" onclick="openGallery('https://picsum.photos/seed/healthcare-technology-4/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/healthcare-technology-5/150/180.jpg" alt="Healthcare Technology 5" onclick="openGallery('https://picsum.photos/seed/healthcare-technology-5/1200/800.jpg')">
+            </div>
+            <div class="post-content">
+                <div class="post-title">🏥 Healthcare Technology Summit</div>
+                <div class="post-description">
+                    One-day summit focused on emerging healthcare technologies, digital health solutions, and their implementation in Indian healthcare systems.
+                </div>
+                <div class="post-stats">
+                    <span>📍 Kolkata, West Bengal</span>
+                    <span>⏱️ 1 Day</span>
+                    <span>📈 Regional</span>
+                </div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action">
+                    <i class="fas fa-heart"></i>
+                    <span>62</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-comment"></i>
+                    <span>20</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="seminar-post" id="research-methodology">
+            <div class="post-header">
+                <div class="post-avatar">SS</div>
+                <div class="post-info">
+                    <div class="post-author">Suchismita Saha</div>
+                    <div class="post-date">July 15, 2023</div>
+                </div>
+            </div>
+            <div class="image-scroll-container">
+                <img class="scroll-image" src="https://picsum.photos/seed/research-methodology-1/150/180.jpg" alt="Research Methodology 1" onclick="openGallery('https://picsum.photos/seed/research-methodology-1/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/research-methodology-2/150/180.jpg" alt="Research Methodology 2" onclick="openGallery('https://picsum.photos/seed/research-methodology-2/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/research-methodology-3/150/180.jpg" alt="Research Methodology 3" onclick="openGallery('https://picsum.photos/seed/research-methodology-3/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/research-methodology-4/150/180.jpg" alt="Research Methodology 4" onclick="openGallery('https://picsum.photos/seed/research-methodology-4/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/research-methodology-5/150/180.jpg" alt="Research Methodology 5" onclick="openGallery('https://picsum.photos/seed/research-methodology-5/1200/800.jpg')">
+            </div>
+            <div class="post-content">
+                <div class="post-title">📚 Research Methodology Workshop</div>
+                <div class="post-description">
+                    College-level workshop on research methodology, scientific writing, and publication ethics for engineering students.
+                </div>
+                <div class="post-stats">
+                    <span>📍 NSEC Kolkata</span>
+                    <span>⏱️ 1 Day</span>
+                    <span>📝 Academic</span>
+                </div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action">
+                    <i class="fas fa-heart"></i>
+                    <span>49</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-comment"></i>
+                    <span>18</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="seminar-post" id="medical-device-innovation">
+            <div class="post-header">
+                <div class="post-avatar">SS</div>
+                <div class="post-info">
+                    <div class="post-author">Suchismita Saha</div>
+                    <div class="post-date">January 10, 2024</div>
+                </div>
+            </div>
+            <div class="image-scroll-container">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-device-innovation-1/150/180.jpg" alt="Medical Device Innovation 1" onclick="openGallery('https://picsum.photos/seed/medical-device-innovation-1/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-device-innovation-2/150/180.jpg" alt="Medical Device Innovation 2" onclick="openGallery('https://picsum.photos/seed/medical-device-innovation-2/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-device-innovation-3/150/180.jpg" alt="Medical Device Innovation 3" onclick="openGallery('https://picsum.photos/seed/medical-device-innovation-3/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-device-innovation-4/150/180.jpg" alt="Medical Device Innovation 4" onclick="openGallery('https://picsum.photos/seed/medical-device-innovation-4/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-device-innovation-5/150/180.jpg" alt="Medical Device Innovation 5" onclick="openGallery('https://picsum.photos/seed/medical-device-innovation-5/1200/800.jpg')">
+                <img class="scroll-image" src="https://picsum.photos/seed/medical-device-innovation-6/150/180.jpg" alt="Medical Device Innovation 6" onclick="openGallery('https://picsum.photos/seed/medical-device-innovation-6/1200/800.jpg')">
+            </div>
+            <div class="post-content">
+                <div class="post-title">🔬 Medical Device Innovation Workshop</div>
+                <div class="post-description">
+                    Intensive three-day hands-on workshop on medical device design, prototyping, and regulatory requirements for healthcare innovations, conducted by leading medical device experts from AIIMS Delhi.
+                </div>
+                <div class="post-stats">
+                    <span>📍 AIIMS Delhi</span>
+                    <span>⏱️ 3 Days</span>
+                    <span>📈 Hands-on</span>
+                </div>
+            </div>
+            <div class="post-actions">
+                <div class="post-action">
+                    <i class="fas fa-heart"></i>
+                    <span>58</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-comment"></i>
+                    <span>22</span>
+                </div>
+                <div class="post-action">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        <!-- Statistics Sidebar -->
+        <div class="stats-sidebar">
+            <!-- Statistics Card -->
+            <div class="stats-card">
+                <h3>📊 Seminar Statistics</h3>
+                <div class="stat-item">
+                    <span class="stat-label">Total Seminars</span>
+                    <span class="stat-value">8</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Workshops</span>
+                    <span class="stat-value">3</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Conferences</span>
+                    <span class="stat-value">2</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Symposiums</span>
+                    <span class="stat-value">2</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Summits</span>
+                    <span class="stat-value">1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Days</span>
+                    <span class="stat-value">15</span>
+                </div>
+            </div>
+            
+            <!-- Institutes Card -->
+            <div class="stats-card">
+                <h3>🏛️ Institutes Visited</h3>
+                <div class="institute-item">
+                    <div class="institute-name">IIT Kharagpur</div>
+                    <div class="institute-details">BCI Research Symposium<br>2 Days • National Level</div>
+                </div>
+                <div class="institute-item">
+                    <div class="institute-name">AIIMS Delhi</div>
+                    <div class="institute-details">Medical Device Innovation<br>3 Days • Hands-on Workshop</div>
+                </div>
+                <div class="institute-item">
+                    <div class="institute-name">NIMHANS</div>
+                    <div class="institute-details">Neuroscience Research<br>2 Days • Research Focus</div>
+                </div>
+                <div class="institute-item">
+                    <div class="institute-name">Kolkata Medical College</div>
+                    <div class="institute-details">Medical Devices Exhibition<br>3 Hours • Interactive</div>
+                </div>
+                <div class="institute-item">
+                    <div class="institute-name">NSEC Kolkata</div>
+                    <div class="institute-details">Research Methodology<br>1 Day • Academic</div>
+                </div>
+            </div>
+            
+            <!-- Professors Card -->
+            <div class="stats-card">
+                <h3>👨‍🏫 Professors Met</h3>
+                <div class="professor-item">
+                    <div class="professor-avatar">DR</div>
+                    <div class="professor-info">
+                        <div class="professor-name">Dr. Rajesh Kumar</div>
+                        <div class="professor-title">BCI Expert • IIT KGP</div>
+                    </div>
+                </div>
+                <div class="professor-item">
+                    <div class="professor-avatar">SP</div>
+                    <div class="professor-info">
+                        <div class="professor-name">Dr. S. Patel</div>
+                        <div class="professor-title">Medical Devices • AIIMS</div>
+                    </div>
+                </div>
+                <div class="professor-item">
+                    <div class="professor-avatar">AM</div>
+                    <div class="professor-info">
+                        <div class="professor-name">Dr. A. Mehta</div>
+                        <div class="professor-title">Neuroscience • NIMHANS</div>
+                    </div>
+                </div>
+                <div class="professor-item">
+                    <div class="professor-avatar">VG</div>
+                    <div class="professor-info">
+                        <div class="professor-name">Dr. V. Gupta</div>
+                        <div class="professor-title">Biomedical Eng. • Virtual</div>
+                    </div>
+                </div>
+                <div class="professor-item">
+                    <div class="professor-avatar">RS</div>
+                    <div class="professor-info">
+                        <div class="professor-name">Dr. R. Sharma</div>
+                        <div class="professor-title">Healthcare Tech • Kolkata</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Suchismita Saha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+<script>
+function openGallery(imageSrc) {
+    const gallery = document.getElementById('imageGallery');
+    const galleryImage = document.getElementById('galleryImage');
+    
+    galleryImage.src = imageSrc;
+    gallery.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGallery() {
+    const gallery = document.getElementById('imageGallery');
+    gallery.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close gallery on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeGallery();
+    }
+});
+
+// Close gallery on background click
+document.getElementById('imageGallery').addEventListener('click', (e) => {
+    if (e.target.id === 'imageGallery') {
+        closeGallery();
+    }
+});
+
+// Interactive post actions functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle like button clicks
+    const likeButtons = document.querySelectorAll('.post-action');
+    
+    likeButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const icon = this.querySelector('i');
+            const count = this.querySelector('span');
+            const isLiked = this.classList.contains('liked');
+            
+            if (icon.classList.contains('fa-heart')) {
+                // Toggle like state
+                if (isLiked) {
+                    this.classList.remove('liked');
+                    count.textContent = parseInt(count.textContent) - 1;
+                } else {
+                    this.classList.add('liked');
+                    count.textContent = parseInt(count.textContent) + 1;
+                }
+            } else if (icon.classList.contains('fa-comment')) {
+                // Comment functionality
+                alert('Comment feature coming soon!');
+            } else if (icon.classList.contains('fa-share')) {
+                // Share functionality
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Suchismita Saha - Seminars & Workshops',
+                        text: 'Check out this amazing seminar experience!',
+                        url: window.location.href
+                    }).catch(err => console.log('Share failed:', err));
+                } else {
+                    // Fallback for browsers that don't support Web Share API
+                    const dummy = document.createElement('input');
+                    document.body.appendChild(dummy);
+                    dummy.value = window.location.href;
+                    dummy.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(dummy);
+                    
+                    // Show feedback
+                    const originalText = count.textContent;
+                    count.textContent = 'Copied!';
+                    setTimeout(() => {
+                        count.textContent = originalText;
+                    }, 2000);
+                }
+            }
+        });
+        
+        // Add hover sound effect (optional)
+        button.addEventListener('mouseenter', function() {
+            // You could add a subtle hover sound here if desired
+        });
+    });
+    
+    // Add ripple effect on click
+    likeButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
+            
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+});
+
+// Add ripple effect CSS
+const rippleCSS = `
+.post-action {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+`;
+
+const styleSheet = document.createElement('style');
+styleSheet.textContent = rippleCSS;
+document.head.appendChild(styleSheet);
+
+// Certificate functionality
+function openCertificate(certificateId) {
+    // Create certificate modal
+    const modal = document.createElement('div');
+    modal.className = 'certificate-modal';
+    modal.innerHTML = `
+        <div class="certificate-modal-content">
+            <div class="certificate-modal-header">
+                <h3>Workshop Certificate</h3>
+                <button class="certificate-modal-close" onclick="closeCertificateModal(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="certificate-modal-body">
+                <div class="certificate-container">
+                    <div class="certificate-header">
+                        <div class="certificate-logo">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h1>Certificate of Completion</h1>
+                        <p>This is to certify that</p>
+                    </div>
+                    <div class="certificate-body">
+                        <h2 class="certificate-name">Suchismita Saha</h2>
+                        <p class="certificate-text">has successfully completed the workshop</p>
+                        <h3 class="certificate-title">${getCertificateTitle(certificateId)}</h3>
+                        <p class="certificate-date">held at ${getCertificateLocation(certificateId)} on ${getCertificateDate(certificateId)}</p>
+                    </div>
+                    <div class="certificate-footer">
+                        <div class="certificate-signature">
+                            <div class="signature-line"></div>
+                            <p>Workshop Instructor</p>
+                        </div>
+                        <div class="certificate-seal">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="certificate-signature">
+                            <div class="signature-line"></div>
+                            <p>Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="certificate-modal-actions">
+                <button class="certificate-btn download-btn" onclick="downloadCertificate('${certificateId}')">
+                    <i class="fas fa-download"></i> Download
+                </button>
+                <button class="certificate-btn share-btn" onclick="shareCertificate('${certificateId}')">
+                    <i class="fas fa-share"></i> Share
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    // Add entrance animation
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+}
+
+function closeCertificateModal(button) {
+    const modal = button.closest('.certificate-modal');
+    modal.classList.remove('show');
+    setTimeout(() => {
+        modal.remove();
+        document.body.style.overflow = 'auto';
+    }, 300);
+}
+
+function getCertificateTitle(certificateId) {
+    const titles = {
+        'bci-workshop': 'Brain-Computer Interface Workshop',
+        'biomedical-seminar': 'Biomedical Engineering Seminar',
+        'signal-processing': 'Digital Signal Processing Workshop',
+        'healthcare-tech': 'Healthcare Technology Innovation'
+    };
+    return titles[certificateId] || 'Workshop';
+}
+
+function getCertificateLocation(certificateId) {
+    const locations = {
+        'bci-workshop': 'IIT Kharagpur',
+        'biomedical-seminar': 'Jadavpur University',
+        'signal-processing': 'NSEC Kolkata',
+        'healthcare-tech': 'Medical College Kolkata'
+    };
+    return locations[certificateId] || 'Institution';
+}
+
+function getCertificateDate(certificateId) {
+    const dates = {
+        'bci-workshop': 'March 15-16, 2024',
+        'biomedical-seminar': 'February 28, 2024',
+        'signal-processing': 'January 20-21, 2024',
+        'healthcare-tech': 'April 10, 2024'
+    };
+    return dates[certificateId] || '2024';
+}
+
+function downloadCertificate(certificateId) {
+    // Create a temporary canvas to generate certificate image
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Set canvas size (A4 ratio)
+    canvas.width = 1200;
+    canvas.height = 850;
+    
+    // Draw certificate background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw border
+    ctx.strokeStyle = '#4ade80';
+    ctx.lineWidth = 5;
+    ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+    
+    // Draw inner border
+    ctx.strokeStyle = '#22d3ee';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
+    
+    // Draw text
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 48px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Certificate of Completion', canvas.width / 2, 100);
+    
+    ctx.font = '24px Arial';
+    ctx.fillText('This is to certify that', canvas.width / 2, 200);
+    
+    ctx.font = 'bold 36px Arial';
+    ctx.fillStyle = '#4ade80';
+    ctx.fillText('Suchismita Saha', canvas.width / 2, 280);
+    
+    ctx.font = '24px Arial';
+    ctx.fillStyle = '#0f172a';
+    ctx.fillText('has successfully completed the workshop', canvas.width / 2, 350);
+    
+    ctx.font = 'bold 28px Arial';
+    ctx.fillText(getCertificateTitle(certificateId), canvas.width / 2, 420);
+    
+    ctx.font = '20px Arial';
+    ctx.fillText(`held at ${getCertificateLocation(certificateId)} on ${getCertificateDate(certificateId)}`, canvas.width / 2, 480);
+    
+    // Download the certificate
+    const link = document.createElement('a');
+    link.download = `certificate-${certificateId}.png`;
+    link.href = canvas.toDataURL();
+    link.click();
+}
+
+function shareCertificate(certificateId) {
+    const shareData = {
+        title: 'Workshop Certificate',
+        text: `I earned a certificate for ${getCertificateTitle(certificateId)}!`,
+        url: window.location.href
+    };
+    
+    if (navigator.share) {
+        navigator.share(shareData);
+    } else {
+        // Fallback
+        const dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        alert('Certificate link copied to clipboard!');
+    }
+}
+</script>
+
+    <script src="script.js"></script>
+</body>
+</html>

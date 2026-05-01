@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suchismita Saha - Biomedical Engineering Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Animated Hero Background */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.base-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #0b3c5d 100%);
+    animation: gradientShift 45s ease-in-out infinite;
+}
+
+.radial-highlight {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 60%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.grid-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: gridDrift 25s ease-in-out infinite;
+    z-index: 2;
+}
+
+.grid-cell {
+    position: absolute;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.grid-cell::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transform: translate(-50%, -50%);
+}
+
+.grid-node {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    transition: all 0.3s ease;
+}
+
+.grid-node.glow {
+    background: radial-gradient(circle, rgba(74, 222, 128, 0.9) 0%, rgba(34, 211, 238, 0.5) 50%, transparent 70%);
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.8), 0 0 30px rgba(34, 211, 238, 0.4);
+    animation: glowWave 3s ease-in-out infinite;
+}
+
+.grid-node.pulse {
+    animation: nodePulse 4s ease-in-out infinite;
+}
+
+.vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.25) 100%);
+    pointer-events: none;
+}
+
+.noise-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px),
+        repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 4px);
+}
+
+@keyframes gradientShift {
+    0%, 100% { background: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #0b3c5d 100%); }
+    25% { background: linear-gradient(140deg, #0f766e 0%, #0d9488 50%, #0b3c5d 100%); }
+    50% { background: linear-gradient(130deg, #0f766e 0%, #0d9488 50%, #0b3c5d 100%); }
+    75% { background: linear-gradient(145deg, #0f766e 0%, #0d9488 50%, #0b3c5d 100%); }
+}
+
+@keyframes gridDrift {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(10px, 3px); }
+    50% { transform: translate(8px, 6px); }
+    75% { transform: translate(3px, 4px); }
+}
+
+@keyframes nodePulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.15;
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.4);
+        opacity: 0.35;
+    }
+}
+
+@keyframes glowWave {
+    0% { 
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% { 
+        transform: translateX(calc(100vw + 100px));
+        opacity: 0;
+    }
+}
+
+.grid-glow-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+</style>
+</head>
+<body>
+    <!-- Floating Particles -->
+    <div class="floating-particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 7s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 8s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="https://www.linkedin.com/in/suchismita-saha-33259728a/" target="_blank" class="logo-linkedin">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <span class="logo-text">Suchismita Saha</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#about" class="nav-link" onclick="scrollToSection('about'); closeMobileMenu(); return false;">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#education" class="nav-link" onclick="scrollToSection('education'); closeMobileMenu(); return false;">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link" onclick="scrollToSection('skills'); closeMobileMenu(); return false;">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#experience" class="nav-link" onclick="scrollToSection('experience'); closeMobileMenu(); return false;">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#achievements" class="nav-link" onclick="scrollToSection('achievements'); closeMobileMenu(); return false;">Achievements</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#activities" class="nav-link" onclick="scrollToSection('activities'); closeMobileMenu(); return false;">Activities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link" onclick="scrollToSection('contact'); closeMobileMenu(); return false;">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link resume-btn" onclick="downloadResume(); closeMobileMenu(); return false;">
+                        <i class="fas fa-download"></i> Resume
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- Animated Hero Background -->
+        <div class="hero-background">
+            <div class="base-gradient"></div>
+            <div class="radial-highlight"></div>
+            <div class="grid-container" id="gridContainer"></div>
+            <div class="grid-glow-wave" id="glowWave"></div>
+            <div class="vignette"></div>
+            <div class="noise-texture"></div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <!-- Profile Image -->
+            <div class="profile-container">
+                <div class="profile-image">
+                    <img src="profilePic.jpeg" alt="Suchismita Saha" class="profile-img">
+                    <div class="profile-glow"></div>
+                </div>
+            </div>
+
+            <!-- Text Content -->
+            <div class="hero-text">
+                <h1 class="hero-title">Suchismita Saha</h1>
+                <h2 class="hero-subtitle">BCI Enthusiast</h2>
+                <p class="hero-description">AIR 140 (GATE BM 2026) | Biomedical Engineering Student | NSEC (2023-27) | JBNSTS Senior BKMB Scholar'23 | Ex-intern at Manipal hospitals</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('activities')">
+                    View My Work <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-secondary" onclick="downloadResume()">
+                    <i class="fas fa-download"></i> Download Resume
+                </button>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Detail Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Title</h2>
+                <button class="modal-close" onclick="closeDetailModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>A passionate and driven biomedical engineering student with a keen interest in developing healthcare solutions
+in the field of neuroscience. With skills in Python and machine learning, combined with other cutting-edge
+technologies, I aim to contribute meaningfully to the R&D sector. Eager to explore opportunities that bridge the
+gap between engineering and healthcare, both in India and globally.</p>
+                </div>
+                <div class="about-research">
+                    <h3>Research Interests</h3>
+                    <div class="research-grid">
+                        <div class="research-item">
+                            <div class="research-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4>Brain-Computer Interface</h4>
+                            <p>Developing neural interfaces for assistive technologies and cognitive enhancement</p>
+                        </div>
+                        <div class="research-item">
+                            <div class="research-icon">
+                                <i class="fas fa-signal"></i>
+                            </div>
+                            <h4>Biomedical Signal Processing</h4>
+                            <p>Advanced analysis of EEG, ECG, and EMG signals for medical diagnostics</p>
+                        </div>
+                        <div class="research-item">
+                            <div class="research-icon">
+                                <i class="fas fa-microscope"></i>
+                            </div>
+                            <h4>Medical Imaging</h4>
+                            <p>AI-powered image analysis for early disease detection and treatment planning</p>
+                        </div>
+                        <div class="research-item">
+                            <div class="research-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <h4>Wearable Health Tech</h4>
+                            <p>Designing smart devices for continuous health monitoring and telemedicine</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="education-info">
+                            <h3>B.Tech in Biomedical Engineering</h3>
+                            <h4>Netaji Subhash Engineering College</h4>
+                            <p class="education-date">2023 - Present</p>
+                        </div>
+                    </div>
+                    <div class="education-details">
+                        <div class="education-stats">
+                            <div class="stat-item">
+                                <strong>Current Year</strong>
+                                <span>3rd Year</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>CGPA</strong>
+                                <span>9.27/10.0</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>Department Rank</strong>
+                                <span>Topper</span>
+                            </div>
+                        </div>
+                        <div class="education-description">
+                            <p>Currently pursuing Bachelor of Technology in Biomedical Engineering with focus on Brain-Computer Interface technology and healthcare applications.</p>
+                            <button class="education-btn" onclick="showDetailModal('education')">
+                                <i class="fas fa-plus"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="education-info">
+                            <h3>Higher Secondary (Science)</h3>
+                            <h4>Khanpur High School</h4>
+                            <p class="education-date">2020 - 2022</p>
+                        </div>
+                    </div>
+                    <div class="education-details">
+                        <div class="education-stats">
+                            <div class="stat-item">
+                                <strong>Stream</strong>
+                                <span>Science</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>Percentage</strong>
+                                <span>92%</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>Board</strong>
+                                <span>WBCHSE</span>
+                            </div>
+                        </div>
+                        <div class="education-description">
+                            <p>Completed Higher Secondary education with Science stream, focusing on Physics, Chemistry, Mathematics, and Biology. Foundation for biomedical engineering studies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span>Biomedical Engineering</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>Fabrication technologies</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>Signal Processing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span>Python,C, Java</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>HTML</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>Machine Learning</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>DSA, OOPs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Software</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span>Arduino</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>Canva</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>MATLAB</span>
+                        </div>
+                        <div class="skill-item">
+                            <span>AutoCAD</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span>Bengali</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>English</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Hindi</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>German</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            
+            <!-- Internships -->
+            <div class="experience-category">
+                <h3><i class="fas fa-briefcase"></i> Internships</h3>
+                <div class="experience-grid">
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-hospital"></i>
+                            </div>
+                            <div class="experience-info">
+                                <h4>Biomedical Engineering Intern</h4>
+                                <h5>Manipal Hospital E.M. Bypass</h5>
+                                <p class="experience-date">May - June 2025</p>
+                            </div>
+                        </div>
+                        <div class="experience-description">
+                            <p>4-week internship in Biomedical Engineering department focusing on medical equipment maintenance, calibration, and clinical environment experience.</p>
+                            <button class="experience-btn" onclick="showDetailModal('internship')">
+                                <i class="fas fa-plus"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects -->
+            <div class="experience-category">
+                <h3><i class="fas fa-flask"></i> Projects</h3>
+                <div class="experience-grid">
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="experience-info">
+                                <h4>Wearable GSR Sensor</h4>
+                                <h5>Stress Monitoring System</h5>
+                                <p class="experience-date">2024 - Present</p>
+                            </div>
+                        </div>
+                        <div class="experience-description">
+                            <p>Design and development of a wearable galvanic skin response sensor for real-time stress monitoring using Arduino and machine learning algorithms.</p>
+                            <div class="project-tags">
+                                <span class="tag">Arduino</span>
+                                <span class="tag">Machine Learning</span>
+                                <span class="tag">Biomedical Sensors</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <div class="experience-info">
+                                <h4>EEG Signal Analysis</h4>
+                                <h5>BCI Application Development</h5>
+                                <p class="experience-date">2023 - 2024</p>
+                            </div>
+                        </div>
+                        <div class="experience-description">
+                            <p>Analysis of EEG signals for brain-computer interface applications using Python and advanced signal processing techniques.</p>
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Signal Processing</span>
+                                <span class="tag">BCI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+        <div class="container">
+            <h2 class="section-title">Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card" onclick="showDetailModal('gate')">
+                    <div class="achievement-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>GATE BM 2026</h3>
+                    <p>AIR 140</p>
+                    <button class="achievement-btn">
+                        <i class="fas fa-arrow-right"></i> View Details
+                    </button>
+                </div>
+                <div class="achievement-card" onclick="showDetailModal('scholarship')">
+                    <div class="achievement-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Scholarships & Awards</h3>
+                    <p>JBNSTS | EY Foundation | Udayan Care Scholarships</p>
+                    <button class="achievement-btn">
+                        <i class="fas fa-arrow-right"></i> View All
+                    </button>
+                </div>
+                
+                <div class="achievement-card" onclick="showDetailModal('academic')">
+                    <div class="achievement-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Academic Excellence</h3>
+                    <p>Consistent academic performance in Biomedical Engineering</p>
+                    <button class="achievement-btn">
+                        <i class="fas fa-arrow-right"></i> View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="section">
+        <div class="container">
+            <h2 class="section-title">Activities</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h3>Seminars & Workshops</h3>
+                            <p>Professional development and learning events</p>
+                        </div>
+                    </div>
+                    <div class="activity-description">
+                        <p>Participated in various seminars and workshops focused on biomedical engineering, BCI research, and medical device innovation.</p>
+                        <button class="activity-btn" onclick="window.location.href='seminars.html'">
+                            <i class="fas fa-arrow-right"></i> View Details
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h3>Courses & Certificates</h3>
+                            <p>Online and formal education achievements</p>
+                        </div>
+                    </div>
+                    <div class="activity-description">
+                        <p>Completed various online courses and earned certificates in biomedical signal processing, Python programming, and healthcare technologies.</p>
+                        <button class="activity-btn" onclick="window.location.href='courses.html'">
+                            <i class="fas fa-arrow-right"></i> View Details
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h3>Magazines and Articles</h3>
+                            <p>Essays and scientific writings</p>
+                        </div>
+                    </div>
+                    <div class="activity-description">
+                        <p>Published essays and scientific articles in various magazines.</p>
+                        <button class="activity-btn" onclick="window.location.href='articles.html'">
+                            <i class="fas fa-arrow-right"></i> View Details
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="activity-info">
+                            <h3>Social Activities</h3>
+                            <p>Community service and volunteer work</p>
+                        </div>
+                    </div>
+                    <div class="activity-description">
+                        <p>Active participation in community service activities including health camps, awareness programs, and rural development initiatives.</p>
+                        
+                        <button class="activity-btn" onclick="window.location.href='social-activities.html'">
+                            <i class="fas fa-arrow-right"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Collaboration Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Let's Connect & Collaborate</h2>
+            <div class="contact-collab-content">
+                <div class="contact-info">
+                    <div class="contact-item email-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:suchismita0905@gmail.com" class="email-link">suchismita0905@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 9330742085</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kolkata, West Bengal</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/suchismita-saha-33259728a/" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Suchismita2005" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="collab-content">
+                    <p class="collab-subtitle">I'm always excited to work on innovative biomedical engineering projects and connect with fellow professionals in the field.</p>
+                    
+                    <div class="collab-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Open to Research Collaborations</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Available for Internships</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <span>Seeking Mentorship Opportunities</span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <a href="mailto:suchismita0905@gmail.com" class="cta-btn primary">
+                            <i class="fas fa-envelope"></i>
+                            Send Me an Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Suchismita Saha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+<script>
+// Animated Grid Generation
+function generateGrid() {
+    const gridContainer = document.getElementById('gridContainer');
+    const cellSize = 70;
+    const cols = Math.ceil(window.innerWidth / cellSize) + 2;
+    const rows = Math.ceil(window.innerHeight / cellSize) + 2;
+    
+    // Clear existing grid
+    gridContainer.innerHTML = '';
+    
+    // Generate grid cells and nodes
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            // Create grid cell
+            const cell = document.createElement('div');
+            cell.className = 'grid-cell';
+            cell.style.position = 'absolute';
+            cell.style.left = (col * cellSize) + 'px';
+            cell.style.top = (row * cellSize) + 'px';
+            cell.style.width = cellSize + 'px';
+            cell.style.height = cellSize + 'px';
+            
+            // Create grid node at intersection
+            const node = document.createElement('div');
+            node.className = 'grid-node';
+            node.style.left = (col * cellSize) + 'px';
+            node.style.top = (row * cellSize) + 'px';
+            
+            // Add random pulse animation to some nodes
+            if (Math.random() < 0.15) {
+                node.classList.add('pulse');
+                node.style.animationDelay = Math.random() * 6 + 's';
+                node.style.animationDuration = (3 + Math.random() * 3) + 's';
+            }
+            
+            // Add periodic glow to some nodes
+            if (Math.random() < 0.2) {
+                node.classList.add('glow');
+                node.style.animationDelay = Math.random() * 8 + 's';
+            }
+            
+            gridContainer.appendChild(cell);
+            gridContainer.appendChild(node);
+        }
+    }
+    
+    // Start periodic glow animation
+    startPeriodicGlow();
+}
+
+function startPeriodicGlow() {
+    // Periodically add/remove glow from random grid nodes
+    setInterval(() => {
+        const nodes = document.querySelectorAll('.grid-node:not(.glow):not(.pulse)');
+        if (nodes.length > 0) {
+            const randomNode = nodes[Math.floor(Math.random() * nodes.length)];
+            randomNode.classList.add('glow');
+            
+            // Remove glow after animation
+            setTimeout(() => {
+                randomNode.classList.remove('glow');
+            }, 3000);
+        }
+    }, 2000);
+}
+
+// Initialize grid on load
+window.addEventListener('load', generateGrid);
+
+// Regenerate grid on resize
+window.addEventListener('resize', generateGrid);
+</script>
+</body>
+</html>

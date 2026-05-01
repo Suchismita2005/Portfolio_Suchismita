@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles & Publications - Suchismita Saha</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Articles Page Styles */
+        .articles-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            overflow: hidden;
+        }
+        
+        .articles-hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+        }
+        
+        .articles-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4ade80, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .articles-hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .articles-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .article-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(74, 222, 128, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .article-card:hover::before {
+            opacity: 1;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+            border-color: rgba(74, 222, 128, 0.6);
+        }
+        
+        .article-category {
+            display: inline-block;
+            background: linear-gradient(45deg, #4ade80, #22d3ee);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .article-title {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-meta i {
+            color: #4ade80;
+        }
+        
+        .article-excerpt {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4ade80;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .article-link:hover {
+            color: #22d3ee;
+            transform: translateX(5px);
+        }
+        
+        .featured-section {
+            margin-bottom: 4rem;
+        }
+        
+        .featured-article {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%);
+            border: 2px solid rgba(74, 222, 128, 0.4);
+            border-radius: 20px;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .featured-content h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        
+        .featured-content p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .featured-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .articles-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .featured-article {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+            
+            .featured-content h2 {
+                font-size: 2rem;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="https://www.linkedin.com/in/suchismita-saha-33259728a/" target="_blank" class="logo-linkedin">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <span class="logo-text">Suchismita Saha</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="articles.html" class="nav-link active">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Articles Hero Section -->
+    <section class="articles-hero">
+        <div class="articles-hero-content">
+            <h1>Articles & Publications</h1>
+            <p>Exploring the frontiers of biomedical engineering, brain-computer interfaces, and innovative healthcare solutions through scientific writing and research.</p>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="featured-article">
+                <div class="featured-content">
+                    <span class="featured-badge">Featured Article</span>
+                    <h2>The Future of Brain-Computer Interfaces in Healthcare</h2>
+                    <p>An in-depth exploration of how BCI technology is revolutionizing patient care, from rehabilitation to cognitive enhancement, and the ethical considerations that come with merging human minds with machines.</p>
+                    <div class="article-meta">
+                        <span><i class="fas fa-calendar"></i> March 2024</span>
+                        <span><i class="fas fa-clock"></i> 8 min read</span>
+                        <span><i class="fas fa-eye"></i> 2.5k views</span>
+                    </div>
+                    <a href="#" class="article-link">
+                        Read Full Article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="featured-image">
+                    <div style="background: linear-gradient(135deg, #4ade80, #22d3ee); width: 100%; height: 300px; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-brain" style="font-size: 4rem; color: white;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="articles-container">
+        <div class="articles-grid">
+            <article class="article-card">
+                <span class="article-category">Biomedical Engineering</span>
+                <h3 class="article-title">Innovative Approaches to Neural Signal Processing</h3>
+                <div class="article-meta">
+                    <span><i class="fas fa-calendar"></i> February 2024</span>
+                    <span><i class="fas fa-clock"></i> 6 min read</span>
+                </div>
+                <p class="article-excerpt">Exploring cutting-edge techniques for processing and interpreting neural signals, with applications in prosthetics and neurorehabilitation.</p>
+                <a href="#" class="article-link">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <article class="article-card">
+                <span class="article-category">Healthcare Technology</span>
+                <h3 class="article-title">AI in Medical Diagnostics: Opportunities and Challenges</h3>
+                <div class="article-meta">
+                    <span><i class="fas fa-calendar"></i> January 2024</span>
+                    <span><i class="fas fa-clock"></i> 7 min read</span>
+                </div>
+                <p class="article-excerpt">A comprehensive analysis of artificial intelligence applications in medical diagnostics, discussing both the potential benefits and the ethical considerations.</p>
+                <a href="#" class="article-link">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <article class="article-card">
+                <span class="article-category">Research</span>
+                <h3 class="article-title">Signal Processing Techniques for EEG Analysis</h3>
+                <div class="article-meta">
+                    <span><i class="fas fa-calendar"></i> December 2023</span>
+                    <span><i class="fas fa-clock"></i> 5 min read</span>
+                </div>
+                <p class="article-excerpt">Detailed examination of advanced signal processing methods for analyzing electroencephalogram data in brain-computer interface applications.</p>
+                <a href="#" class="article-link">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <article class="article-card">
+                <span class="article-category">Clinical Applications</span>
+                <h3 class="article-title">BCI Technology in Stroke Rehabilitation</h3>
+                <div class="article-meta">
+                    <span><i class="fas fa-calendar"></i> November 2023</span>
+                    <span><i class="fas fa-clock"></i> 8 min read</span>
+                </div>
+                <p class="article-excerpt">Investigating the effectiveness of brain-computer interface systems in rehabilitation programs for stroke patients and motor recovery.</p>
+                <a href="#" class="article-link">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <article class="article-card">
+                <span class="article-category">Ethics & Policy</span>
+                <h3 class="article-title">Ethical Considerations in Neurotechnology Development</h3>
+                <div class="article-meta">
+                    <span><i class="fas fa-calendar"></i> October 2023</span>
+                    <span><i class="fas fa-clock"></i> 6 min read</span>
+                </div>
+                <p class="article-excerpt">Addressing the ethical implications of advancing neurotechnology, including privacy concerns, consent, and the potential for cognitive enhancement.</p>
+                <a href="#" class="article-link">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <article class="article-card">
+                <span class="article-category">Future Trends</span>
+                <h3 class="article-title">The Next Generation of Medical Devices</h3>
+                <div class="article-meta">
+                    <span><i class="fas fa-calendar"></i> September 2023</span>
+                    <span><i class="fas fa-clock"></i> 5 min read</span>
+                </div>
+                <p class="article-excerpt">Exploring emerging trends in medical device technology, from wearable sensors to implantable systems that monitor and treat health conditions.</p>
+                <a href="#" class="article-link">
+                    Read More <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Suchismita Saha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
